@@ -1,0 +1,49 @@
+# .bashrc
+
+# Source global definitions
+if [ -f /etc/bashrc ]; then
+	. /etc/bashrc
+fi
+
+# User specific environment
+if ! [[ "$PATH" =~ "$HOME/.local/bin:$HOME/bin:" ]]
+then
+    PATH="$HOME/.local/bin:$HOME/bin:$PATH"
+fi
+export PATH
+
+# Uncomment the following line if you don't like systemctl's auto-paging feature:
+# export SYSTEMD_PAGER=
+
+# User specific aliases and functions
+
+# Butty added:
+export PATH="/usr/local/bin:$PATH"   # added for fio
+[[ -f /scripts/mbutty/butbin/butty_profile ]] &&  source /scripts/mbutty/butbin/butty_profile
+[[ -f /scripts/mbutty/bmscripts/bmprofile ]] &&  source /scripts/mbutty/bmscripts/bmprofile
+
+
+export PYENV_ROOT="$HOME/.pyenv"
+command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/root/miniconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/root/miniconda3/etc/profile.d/conda.sh" ]; then
+        . "/root/miniconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/root/miniconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
+eval "$(zoxide init bash --cmd cd)"
+# Set up fzf key bindings and fuzzy completion
+eval "$(fzf --bash)"
+
