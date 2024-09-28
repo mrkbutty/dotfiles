@@ -19,8 +19,11 @@ export PATH
 
 # Butty added:
 export PATH="/usr/local/bin:$PATH"   # added for fio
-[[ -f /scripts/mbutty/butbin/butty_profile ]] &&  source /scripts/mbutty/butbin/butty_profile
-[[ -f /scripts/mbutty/bmscripts/bmprofile ]] &&  source /scripts/mbutty/bmscripts/bmprofile
+
+# Buttys Custom Profile:
+[[ -f /scripts/mbutty/butbin/butty_profile ]] && source /scripts/mbutty/butbin/butty_profile
+# Buttys Benchmark Environment setup:
+[[ -f /scripts/mbutty/bmscripts/bmprofile ]] && source /scripts/mbutty/bmscripts/bmprofile
 
 
 export PYENV_ROOT="$HOME/.pyenv"
@@ -43,7 +46,7 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
-eval "$(zoxide init bash --cmd cd)"
-# Set up fzf key bindings and fuzzy completion
-eval "$(fzf --bash)"
-
+# Useful tools zoxide (replaces cd), fzf (fuzzy finder try Ctrl-R), direnv (directory custom envs):
+which zoxide > /dev/null 2>&1 && eval "$(zoxide init bash --cmd cd)"
+which fzf > /dev/null 2>&1 && eval "$(fzf --bash)"
+which direnv > /dev/null 2>&1 && eval "$(direnv hook bash)"
